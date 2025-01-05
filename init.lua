@@ -645,7 +645,21 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        ts_ls = {},
+        --
+        -- NOTE: LSP for `ts_ls` is called by `volar` so commented out
+        --
+        -- ts_ls = {},
+        --
+        volar = {
+          -- add filetypes for typescript, javascript and vue
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+          init_options = {
+            vue = {
+              -- disable hybrid mode
+              hybridMode = false,
+            },
+          },
+        },
         --
 
         lua_ls = {
