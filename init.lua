@@ -639,6 +639,28 @@ require('lazy').setup({
         bashls = {
           filetypes = { 'sh', 'zsh' },
         },
+        -- WIP: Perl LSP
+        -- NOTE: Disabled as the libs aren't there and need to work in carton/docker/etc
+        --
+        -- Perl LSP Config options
+        --  - https://github.com/bscan/PerlNavigator?tab=readme-ov-file#neovim
+        --
+        -- Note from Neovim on running LSP in containers
+        --  - https://github.com/neovim/nvim-lspconfig/wiki/Running-language-servers-in-containers
+        --
+        -- perlnavigator = {
+        --  settings = {
+        --    perlnavigator = {
+        --       perlPath = 'docker exec --interactive container /usr/bin/perl 2>/dev/null',
+        --       perlPath = 'perl',
+        --       enableWarnings = true,
+        --       perltidyProfile = '',
+        --       perlcriticProfile = '',
+        --       perlcriticEnabled = true,
+        --    },
+        --  },
+        -- },
+
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
