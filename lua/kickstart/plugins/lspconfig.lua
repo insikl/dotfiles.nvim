@@ -196,7 +196,7 @@ return {
         -- ts_ls = {}, -- Disable the built-in typescript LSP
         --
         -- https://www.lazyvim.org/extras/lang/vue
-        volar = require 'lazylsp.config.volar',
+        vue_ls = require 'lazylsp.config.vue_ls',
         vtsls = require 'lazylsp.config.vtsls',
         eslint = require 'lazylsp.config.eslint',
         -- vacuum = require 'lazylsp.config.vacuum', -- WIP: OpenAPI linter
