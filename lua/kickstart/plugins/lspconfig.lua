@@ -115,7 +115,7 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -142,7 +142,7 @@ return {
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
@@ -176,6 +176,7 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      local vue_ls_conf = require 'lazylsp.config.vue_ls.setup'
       local servers = {
         -- clangd = {},
         gopls = {},
@@ -193,11 +194,13 @@ return {
         --
         -- NOTE: LSP for `ts_ls` is called by `volar` so commented out
         --
-        -- ts_ls = {}, -- Disable the built-in typescript LSP
+        -- https://github.com/vuejs/language-tools/wiki/Neovim
+        ts_ls = vue_ls_conf.ts_ls_config,
         --
         -- https://www.lazyvim.org/extras/lang/vue
-        vue_ls = require 'lazylsp.config.vue_ls',
-        vtsls = require 'lazylsp.config.vtsls',
+        vue_ls = vue_ls_conf.vue_ls_config,
+        vtsls = vue_ls_conf.vtsls_config,
+
         eslint = require 'lazylsp.config.eslint',
         -- vacuum = require 'lazylsp.config.vacuum', -- WIP: OpenAPI linter
         -- perlnavigator = require 'lazylsp.config.perlnavigator', -- WIP: Perl LSP
@@ -222,7 +225,7 @@ return {
       -- servers config above. Quickest solution to minimize changes to order
       -- of the file.
       require 'lazylsp.config.eslint.keymaps'
-      require 'lazylsp.config.vacuum.filetypes'
+      -- require 'lazylsp.config.vacuum.filetypes'
 
       -- Ensure the servers and tools above are installed
       --
