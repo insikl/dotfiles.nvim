@@ -25,7 +25,9 @@ return {
         'perl',
         'typescript',
         'javascript',
-        'bash',
+        'regex',
+        'yaml',
+        'json',
       }
       require('nvim-treesitter').install(parsers)
       vim.api.nvim_create_autocmd('FileType', {
